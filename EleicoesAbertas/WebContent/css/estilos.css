@@ -1,0 +1,121 @@
+  html {
+     overflow: -moz-scrollbars-vertical;
+  }  /*Força o firefox a mostrar a barra de rolagem vertical*/
+  
+*  {
+	margin:0;
+	padding:0;
+}
+
+	body{
+	margin:0;
+	padding:10px 0 10px 0;
+	text-align:center; /* hack para o IE centralizar a pagina */
+	font: 100% "Trebuchet MS", Verdana, Arial;
+	background-color:#FFF;
+	}
+
+	html, body {height:100%;}
+	
+	#wrapper{
+	text-align:left;		
+	margin:0 auto;
+	min-height:100%;
+	position:relative;	
+	width:900px;
+	background-color:#F8F8F8;	
+	}
+	
+	#header{
+	width:100%;
+	margin:0;
+	height:60px;
+	border-bottom:1px solid #ccc;	
+	}
+	
+	#header h1 a{
+	display:block;
+	width:800px;
+	height:60px;
+	font-size:1.9em;
+	padding:15px;
+	text-align:center;
+	color:#666;
+	text-decoration:none;
+	}
+	
+	#content{
+	height:auto;
+	overflow:hidden;
+	background:#F8F8F8;
+	margin-bottom:30px;
+	padding-bottom:30px;
+	}
+	
+	#footer {
+	margin:0;
+	position:absolute;
+	bottom:0;
+	padding-top:20px;	
+	width:100%;
+	height:40px;
+	background-color:#0199CB;
+	border-bottom:1px solid #ccc;	
+	}
+
+	a{color:#000; font-weight:bold;}
+
+/* ----------------------------------------------------------------- Formatação de Conteúdo ----------------------------------------------------*/
+	
+	#content h2{
+	padding: 18px 20px 3px 15px;
+	font-size:1.4em;
+	color:#004891;
+	}
+	
+	
+	#content h3{
+	padding: 18px 20px 3px 25px;
+	font-size:1.2em;
+	color:#004891;
+	}
+	
+
+	#content p {
+	padding:8px 6px 8px 50px ;
+	line-height:24px;
+	font-size:85%;
+	}
+	
+	
+	#content ul li {
+			font: 0.8em Verdana, "Trebuchet MS", Arial, Helvetica, sans-serif;
+			text-align:left;
+			margin:10px 0 0 40px;
+			list-style-type:disc;
+	}	
+	
+	#content table{
+			font: 0.8em Verdana, "Trebuchet MS", Arial, Helvetica, sans-serif;
+			text-align:left;
+			margin:10px;
+			border: 1px solid #004891;
+	}
+	
+	#content table td, 	#content table th{
+			padding:10px;
+			border: 1px solid #004891;
+	}
+	
+	#content img{
+			border: 2px solid #004891;
+	}	
+		
+	#content a{
+	color:#004891;
+	}			
+	
+	#content .legend{
+	text-align:center;
+	margin-top:-18px;
+	}		
