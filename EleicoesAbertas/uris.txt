@@ -1,0 +1,19 @@
+//Um candidato
+eleicoesful/{versao}/{anoEleicao}/candidato/{id}
+//todos candidatos
+eleicoesful/{versao}/{anoEleicao}/candidato/
+//candidato por numero
+eleicoesful/{versao}/{anoEleicao}/candidato/{estado}/{numeroEleicao}
+
+//todos candidatos dessa região
+eleicoesful/{versao}/{anoEleicao}/{estado}/
+
+//candidatos por região e cargo 
+eleicoesful/{versao}/{anoEleicao}/{estado}/{cargo}/
+
+//candidatos eleitos para esse cargo
+eleicoesful/{versao}/{anoEleicao}/{estado}/{cargo}/eleitos/
+
+
+
+

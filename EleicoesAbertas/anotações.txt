@@ -1,0 +1,5 @@
+Objetivo: Permitir que o usuário possa acompanhar um deputado e mostrar dados sobre ele com serviços comuns na internet, como notícias entre outros.
+
+Onde temos os deputados e leis:
+
+www2.camara.gov.br
