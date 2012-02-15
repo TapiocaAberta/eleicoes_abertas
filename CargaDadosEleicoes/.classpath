@@ -17,9 +17,6 @@
 	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/javaee-api-5.0-3.jar"/>
 	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/javassist.jar"/>
-	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/jersey-core-1.4.jar"/>
-	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/jersey-server-1.4.jar"/>
-	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/jsr311-api-0.9.jar"/>
 	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/jta.jar"/>
 	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/junit-4.8.2.jar"/>
 	<classpathentry kind="lib" path="/EleicoesAbertas/WebContent/WEB-INF/lib/log4j-1.2.16.jar"/>

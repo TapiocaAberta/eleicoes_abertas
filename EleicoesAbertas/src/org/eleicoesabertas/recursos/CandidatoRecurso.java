@@ -26,11 +26,14 @@ public class CandidatoRecurso {
 	int pgNum;
 
 	public CandidatoRecurso() {
+		
+		//TODO: you know... remove it and start using CDI
 		dao = new CandidatosDao();
 	}
 
 	@Path("/{id: [0-9]+}")
 	@GET
+	@Produces(MediaType.APPLICATION_XML)
 	public Candidato obterCandidatoPorId(@PathParam("id") int id) {
 		return dao.obterCandidato(id);
 	}
@@ -100,6 +103,7 @@ public class CandidatoRecurso {
 	@SuppressWarnings("unchecked")
 	@Path("/{estado}/{cargo}")
 	@GET
+	@Produces(MediaType.APPLICATION_XML)
 	public Resultados candidatosRegiaoCargo(@PathParam("estado") String strUf,
 			@PathParam("cargo") String strCargo) {
 		List<Candidato> candidatos = new ArrayList<Candidato>();
@@ -116,6 +120,7 @@ public class CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	@Path("/{estado}/{cargo}/{partido}")
+	@Produces(MediaType.APPLICATION_XML)
 	@GET
 	public Resultados candidatosRegiaoCargoPartido(
 			@PathParam("estado") String strUf,
@@ -135,6 +140,7 @@ public class CandidatoRecurso {
 	
 	@SuppressWarnings("unchecked")
 	@Path("/{estado}/{cargo}/{partido}/eleitos")
+	@Produces(MediaType.APPLICATION_XML)
 	@GET
 	public Resultados candidatosEleitosRegiaoCargoPartido(
 			@PathParam("estado") String strUf,
@@ -156,6 +162,7 @@ public class CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	@Path("{estado}/{cargo}/eleitos")
+	@Produces(MediaType.APPLICATION_XML)
 	@GET
 	public Resultados candidatosEleitosRegiaoCargo(
 			@PathParam("estado") String strUf,
@@ -174,6 +181,7 @@ public class CandidatoRecurso {
 	}
 
 	@Path("/busca")
+	@Produces(MediaType.APPLICATION_XML)
 	@GET
 	public Resultados busca(@QueryParam("nome") String nome,
 			@QueryParam("partido") String strPartido,

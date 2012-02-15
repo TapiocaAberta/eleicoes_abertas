@@ -3,37 +3,37 @@ package org.eleicoesabertas.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Resultados {
-	
-	private int pagina;	
-	private int quantidade;	
-	private String busca;	
+
+	private int pagina;
+	private int quantidade;
+	private String busca;
 	private Date data;
 	private long totalResultados;
-	private List<Candidato> candidatos;
-	
+	private Candidatos candidatos;
+
 	public Resultados() {
 	}
 
 	public Resultados(int pagina, int quantidade, String busca,
-			List<Candidato> candidatos) {
+			List<Candidato> listaCandidatos) {
 		super();
-		if(pagina < 1) pagina=1;
+		if (pagina < 1)
+			pagina = 1;
 		this.pagina = pagina;
-		this.candidatos = candidatos;
+		this.candidatos = new Candidatos(listaCandidatos);
+
 		this.quantidade = quantidade;
 		this.busca = busca;
 		this.data = new Date();
 		totalResultados = -1;
-		
+
 	}
 
-	@XmlAttribute
 	public int getPagina() {
 		return pagina;
 	}
@@ -42,7 +42,6 @@ public class Resultados {
 		this.pagina = pagina;
 	}
 
-	@XmlAttribute
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -51,7 +50,6 @@ public class Resultados {
 		this.quantidade = quantidade;
 	}
 
-	@XmlAttribute
 	public String getBusca() {
 		return busca;
 	}
@@ -60,7 +58,6 @@ public class Resultados {
 		this.busca = busca;
 	}
 
-	@XmlAttribute
 	public Date getData() {
 		return data;
 	}
@@ -69,23 +66,43 @@ public class Resultados {
 		this.data = data;
 	}
 
-	@XmlElement(name="candidato")
-	public List<Candidato> getCandidatos() {
-		return candidatos;
-	}
-
-	public void setCandidatos(List<Candidato> candidatos) {
-		this.candidatos = candidatos;
-	}
-
-	@XmlAttribute
 	public long getTotalResultados() {
 		return totalResultados;
 	}
 
-	public void setTotalResultados(long  totalResultados) {
+	public void setTotalResultados(long totalResultados) {
 		this.totalResultados = totalResultados;
 	}
-	
-	
+
+	public Candidatos getCandidatos() {
+		return candidatos;
+	}
+
+	public void setCandidatos(Candidatos candidatos) {
+		this.candidatos = candidatos;
+	}
+
+	@XmlRootElement(name = "candidatos")
+	public static class Candidatos {
+
+		public Candidatos() {
+		}
+
+		public Candidatos(List<Candidato> candidatos) {
+			super();
+			this.candidatos = candidatos;
+		}
+
+		private List<Candidato> candidatos;
+
+		@XmlElement(name = "candidato")
+		public List<Candidato> getCandidatos() {
+			return candidatos;
+		}
+
+		public void setCandidatos(List<Candidato> candidatos) {
+			this.candidatos = candidatos;
+		}
+	}
+
 }

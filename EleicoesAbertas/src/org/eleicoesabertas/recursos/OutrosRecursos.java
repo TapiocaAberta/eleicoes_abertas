@@ -17,8 +17,9 @@ import org.eleicoesabertas.model.Partido;
 import org.eleicoesabertas.model.ResultadoEleicao;
 import org.eleicoesabertas.model.Situacao;
 import org.eleicoesabertas.util.EmUtil;
+import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
 
-@Path("/{anoEleicao}")
+@Path("{anoEleicao}")
 public class OutrosRecursos {
 
 	CandidatosDao dao;
@@ -36,67 +37,72 @@ public class OutrosRecursos {
 	@Path("/cargo")
 	@Produces(MediaType.APPLICATION_XML)
 	@GET
-	public Cargo[] cargos() {
+	@Wrapped(element="cargos")
+	public  List<Cargo> cargos() {
 		@SuppressWarnings("unchecked")
 		List<Cargo> cargos = (List<Cargo>) dao.executaQueryPaginada(
 				em.createQuery("SELECT c FROM Cargo c"), pgNum);
-		return cargos.toArray(new Cargo[cargos.size()]);
+		return cargos;
 	}
 
 	@Path("/partido")
 	@Produces(MediaType.APPLICATION_XML)
+	@Wrapped(element="partidos")
 	@GET
-	public Partido[] partidos() {
+	public List<Partido> partidos() {
 		@SuppressWarnings("unchecked")
 		List<Partido> partidos = (List<Partido>) dao.executaQueryPaginada(
 				em.createQuery("SELECT p FROM Partido p"), pgNum);
-		return partidos.toArray(new Partido[partidos.size()]);
+		return partidos;
 	}
 
 	@Path("/coligacao")
 	@Produces(MediaType.APPLICATION_XML)
 	@GET
-	public Coligacao[] coligacoes() {
+	@Wrapped(element="coligacoes")
+	public List<Coligacao> coligacoes() {
 		@SuppressWarnings("unchecked")
 		List<Coligacao> coligacoes = (List<Coligacao>) dao
 				.executaQueryPaginada(
 						em.createQuery("SELECT c FROM Coligacao c"), pgNum);
-		return coligacoes.toArray(new Coligacao[coligacoes.size()]);
+		return coligacoes;
 
 	}
 
 	@Path("/situacao")
 	@Produces(MediaType.APPLICATION_XML)
 	@GET
-	public Situacao[] situacoes() {
+	@Wrapped(element="situacoes")
+	public  List<Situacao> situacoes() {
 		@SuppressWarnings("unchecked")
 		List<Situacao> situacoes = (List<Situacao>) dao.executaQueryPaginada(
 				em.createQuery("SELECT s FROM Situacao s"), pgNum);
-		return situacoes.toArray(new Situacao[situacoes.size()]);
+		return situacoes;
 	}
 
 	@Path("/resultadoEleicao")
 	@Produces(MediaType.APPLICATION_XML)
 	@GET
-	public ResultadoEleicao[] resultadosEleicao() {
+	@Wrapped(element="resultadosEleicao")
+	public  List<ResultadoEleicao> resultadosEleicao() {
 		@SuppressWarnings("unchecked")
 		List<ResultadoEleicao> resultadoEleicoes = (List<ResultadoEleicao>) dao
 				.executaQueryPaginada(
 						em.createQuery("SELECT r FROM ResultadoEleicao r"),
 						pgNum);
-		return resultadoEleicoes.toArray(new ResultadoEleicao[resultadoEleicoes
-				.size()]);
+		return resultadoEleicoes;
 
 	}
 
 	@Path("/ocupacao")
 	@Produces(MediaType.APPLICATION_XML)
 	@GET
-	public Ocupacao[] ocupacoes() {
+	@Wrapped(element="ocupacoes")	
+	public  List<Ocupacao> ocupacoes() {
 		@SuppressWarnings("unchecked")
 		List<Ocupacao> ocupacoes = (List<Ocupacao>) dao.executaQueryPaginada(
 				em.createQuery("SELECT o FROM Ocupacao o"), pgNum);
-		return ocupacoes.toArray(new Ocupacao[ocupacoes.size()]);
+		return ocupacoes;
 
 	}
 }

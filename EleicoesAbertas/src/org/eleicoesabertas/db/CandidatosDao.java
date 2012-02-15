@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-//TODO: Remove all the the javax.ws references from here!
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -25,9 +22,14 @@ import org.eleicoesabertas.recursos.DefinicoesServicos;
 import org.eleicoesabertas.recursos.RecursosUtil;
 import org.eleicoesabertas.util.EmUtil;
 
+/**
+ * 
+ * This class is responsible to perfom all operation with the database in a stateles way. All.
+ * @author William Antônio
+ *
+ */
 public class CandidatosDao {
 
-	@PersistenceContext(unitName = "default", name = "default")
 	EntityManager em;
 	
 	public CandidatosDao(){
