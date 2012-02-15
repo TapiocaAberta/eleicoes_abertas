@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.eleicoesabertas.db.CandidatosDao;
 import org.eleicoesabertas.model.Cargo;
 import org.eleicoesabertas.model.Coligacao;
 import org.eleicoesabertas.model.Ocupacao;
@@ -19,6 +20,8 @@ import org.eleicoesabertas.util.EmUtil;
 
 @Path("/{anoEleicao}")
 public class OutrosRecursos {
+
+	CandidatosDao dao;
 	@QueryParam("pagina")
 	int pgNum;
 
@@ -27,6 +30,7 @@ public class OutrosRecursos {
 	public OutrosRecursos() {
 		super();
 		em = EmUtil.getEntityManager();
+		dao = new CandidatosDao();
 	}
 
 	@Path("/cargo")
@@ -34,7 +38,7 @@ public class OutrosRecursos {
 	@GET
 	public Cargo[] cargos() {
 		@SuppressWarnings("unchecked")
-		List<Cargo> cargos = (List<Cargo>) AcessoRecursos.executaQueryPaginada(
+		List<Cargo> cargos = (List<Cargo>) dao.executaQueryPaginada(
 				em.createQuery("SELECT c FROM Cargo c"), pgNum);
 		return cargos.toArray(new Cargo[cargos.size()]);
 	}
@@ -44,9 +48,8 @@ public class OutrosRecursos {
 	@GET
 	public Partido[] partidos() {
 		@SuppressWarnings("unchecked")
-		List<Partido> partidos = (List<Partido>) AcessoRecursos
-				.executaQueryPaginada(
-						em.createQuery("SELECT p FROM Partido p"), pgNum);
+		List<Partido> partidos = (List<Partido>) dao.executaQueryPaginada(
+				em.createQuery("SELECT p FROM Partido p"), pgNum);
 		return partidos.toArray(new Partido[partidos.size()]);
 	}
 
@@ -55,7 +58,7 @@ public class OutrosRecursos {
 	@GET
 	public Coligacao[] coligacoes() {
 		@SuppressWarnings("unchecked")
-		List<Coligacao> coligacoes = (List<Coligacao>) AcessoRecursos
+		List<Coligacao> coligacoes = (List<Coligacao>) dao
 				.executaQueryPaginada(
 						em.createQuery("SELECT c FROM Coligacao c"), pgNum);
 		return coligacoes.toArray(new Coligacao[coligacoes.size()]);
@@ -67,9 +70,8 @@ public class OutrosRecursos {
 	@GET
 	public Situacao[] situacoes() {
 		@SuppressWarnings("unchecked")
-		List<Situacao> situacoes = (List<Situacao>) AcessoRecursos
-				.executaQueryPaginada(
-						em.createQuery("SELECT s FROM Situacao s"), pgNum);
+		List<Situacao> situacoes = (List<Situacao>) dao.executaQueryPaginada(
+				em.createQuery("SELECT s FROM Situacao s"), pgNum);
 		return situacoes.toArray(new Situacao[situacoes.size()]);
 	}
 
@@ -78,7 +80,7 @@ public class OutrosRecursos {
 	@GET
 	public ResultadoEleicao[] resultadosEleicao() {
 		@SuppressWarnings("unchecked")
-		List<ResultadoEleicao> resultadoEleicoes = (List<ResultadoEleicao>) AcessoRecursos
+		List<ResultadoEleicao> resultadoEleicoes = (List<ResultadoEleicao>) dao
 				.executaQueryPaginada(
 						em.createQuery("SELECT r FROM ResultadoEleicao r"),
 						pgNum);
@@ -86,18 +88,15 @@ public class OutrosRecursos {
 				.size()]);
 
 	}
-	
+
 	@Path("/ocupacao")
 	@Produces(MediaType.APPLICATION_XML)
 	@GET
 	public Ocupacao[] ocupacoes() {
 		@SuppressWarnings("unchecked")
-		List<Ocupacao> ocupacoes = (List<Ocupacao>) AcessoRecursos
-				.executaQueryPaginada(
-						em.createQuery("SELECT o FROM Ocupacao o"),
-						pgNum);
-		return ocupacoes.toArray(new Ocupacao[ocupacoes
-				.size()]);
+		List<Ocupacao> ocupacoes = (List<Ocupacao>) dao.executaQueryPaginada(
+				em.createQuery("SELECT o FROM Ocupacao o"), pgNum);
+		return ocupacoes.toArray(new Ocupacao[ocupacoes.size()]);
 
 	}
 }

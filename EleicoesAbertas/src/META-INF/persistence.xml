@@ -25,10 +25,10 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.connection.password" value="senha" />
+			<property name="hibernate.connection.password" value="admin" />
 			<property name="hibernate.connection.url"
 				value="jdbc:mysql://localhost/eleicoesDW?characterEncoding=utf8" />
-			<property name="hibernate.connection.username" value="appJava" />
+			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 
 			<!-- configuration pool via c3p0 -->

@@ -18,13 +18,4 @@
     <servlet-name>JerseyServlet</servlet-name>
     <url-pattern>/apiEleicoes/beta/*</url-pattern>
   </servlet-mapping>
-  <filter>
-    <display-name>FiltroServicos</display-name>
-    <filter-name>FiltroServicos</filter-name>
-    <filter-class>org.eleicoesabertas.recursos.FiltroServicos</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FiltroServicos</filter-name>
-    <url-pattern>/apiEleicoes/beta/*</url-pattern>
-  </filter-mapping>
 </web-app>

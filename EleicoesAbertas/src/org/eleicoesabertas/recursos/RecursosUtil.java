@@ -26,4 +26,12 @@ public class RecursosUtil {
 					Status.INTERNAL_SERVER_ERROR);
 	}
 
+	public static boolean checa(String str, int lenght) {
+		return checa(str) || str.length() < lenght;
+	}
+
+	public static boolean checa(String str) {
+		return str == null || str.isEmpty();
+	}
+
 }
