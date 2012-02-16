@@ -35,10 +35,10 @@ public class OutrosRecursos {
 	}
 
 	@Path("/cargo")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
-	@Wrapped(element="cargos")
-	public  List<Cargo> cargos() {
+	@Wrapped(element = "cargos")
+	public List<Cargo> cargos() {
 		@SuppressWarnings("unchecked")
 		List<Cargo> cargos = (List<Cargo>) dao.executaQueryPaginada(
 				em.createQuery("SELECT c FROM Cargo c"), pgNum);
@@ -46,8 +46,8 @@ public class OutrosRecursos {
 	}
 
 	@Path("/partido")
-	@Produces(MediaType.APPLICATION_XML)
-	@Wrapped(element="partidos")
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Wrapped(element = "partidos")
 	@GET
 	public List<Partido> partidos() {
 		@SuppressWarnings("unchecked")
@@ -57,9 +57,9 @@ public class OutrosRecursos {
 	}
 
 	@Path("/coligacao")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
-	@Wrapped(element="coligacoes")
+	@Wrapped(element = "coligacoes")
 	public List<Coligacao> coligacoes() {
 		@SuppressWarnings("unchecked")
 		List<Coligacao> coligacoes = (List<Coligacao>) dao
@@ -70,10 +70,10 @@ public class OutrosRecursos {
 	}
 
 	@Path("/situacao")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
-	@Wrapped(element="situacoes")
-	public  List<Situacao> situacoes() {
+	@Wrapped(element = "situacoes")
+	public List<Situacao> situacoes() {
 		@SuppressWarnings("unchecked")
 		List<Situacao> situacoes = (List<Situacao>) dao.executaQueryPaginada(
 				em.createQuery("SELECT s FROM Situacao s"), pgNum);
@@ -81,10 +81,10 @@ public class OutrosRecursos {
 	}
 
 	@Path("/resultadoEleicao")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
-	@Wrapped(element="resultadosEleicao")
-	public  List<ResultadoEleicao> resultadosEleicao() {
+	@Wrapped(element = "resultadosEleicao")
+	public List<ResultadoEleicao> resultadosEleicao() {
 		@SuppressWarnings("unchecked")
 		List<ResultadoEleicao> resultadoEleicoes = (List<ResultadoEleicao>) dao
 				.executaQueryPaginada(
@@ -95,10 +95,10 @@ public class OutrosRecursos {
 	}
 
 	@Path("/ocupacao")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
-	@Wrapped(element="ocupacoes")	
-	public  List<Ocupacao> ocupacoes() {
+	@Wrapped(element = "ocupacoes")
+	public List<Ocupacao> ocupacoes() {
 		@SuppressWarnings("unchecked")
 		List<Ocupacao> ocupacoes = (List<Ocupacao>) dao.executaQueryPaginada(
 				em.createQuery("SELECT o FROM Ocupacao o"), pgNum);

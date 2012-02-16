@@ -35,14 +35,15 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 			<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider
 			</property>
 			<property name="hibernate.c3p0.acquire_increment">5</property>
-			<property name="hibernate.c3p0.timeout">1200</property>
+			<property name="hibernate.c3p0.timeout">30</property>
 			<property name="hibernate.c3p0.idle_test_period">60</property>
-			<property name="hibernate.c3p0.max_size">100</property>
-			<property name="hibernate.c3p0.max_statements">50</property>
-			<property name="hibernate.c3p0.min_size">10</property>
+			<property name="hibernate.c3p0.max_size">80</property>
+			<property name="hibernate.c3p0.max_statements">60</property>
+			<property name="hibernate.c3p0.min_size">20</property>
 			<property name="hibernate.c3p0.maxIdleTime">3600</property>
 			<property name="hibernate.c3p0.maxIdleTimeExcessConnections">300</property>
 			<property name="hibernate.c3p0.numHelperThreads">6</property>
+			
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -1,5 +1,5 @@
 package org.eleicoesabertas.recursos;
 
 public class DefinicoesServicos {
-	public static final int TAMANHO_PAGINA = 30;
+	public static final int TAMANHO_PAGINA = 10;
 }

@@ -1,6 +1,7 @@
 package org.eleicoesabertas.db;
  
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import org.eleicoesabertas.util.EmUtil;
  * @author William Antônio
  *
  */
+
 public class CandidatosDao {
 
 	EntityManager em;

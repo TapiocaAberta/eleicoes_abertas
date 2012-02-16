@@ -1,7 +1,5 @@
 package org.eleicoesabertas.recursos;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,29 +16,30 @@ import org.eleicoesabertas.model.Resultados;
 
 @Path("/{anoEleicao}/candidatos")
 public class CandidatoRecurso {
-	CandidatosDao dao;	
-	
+
+	CandidatosDao dao;
+
 	@PathParam("anoEleicao")
 	String anoEleicao;
 	@QueryParam("pagina")
 	int pgNum;
 
 	public CandidatoRecurso() {
-		
-		//TODO: you know... remove it and start using CDI
+
+		// TODO: you know... remove it and start using CDI
 		dao = new CandidatosDao();
 	}
 
 	@Path("/{id: [0-9]+}")
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Candidato obterCandidatoPorId(@PathParam("id") int id) {
 		return dao.obterCandidato(id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Path("/{estado: [A-Z]+}/")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados obterCandidatoPorEstado(@PathParam("estado") String uf) {
 		uf = uf.toUpperCase();
@@ -53,49 +52,53 @@ public class CandidatoRecurso {
 				+ uf.toUpperCase(), candidatos);
 		return r;
 	}
+
 	@SuppressWarnings("unchecked")
 	@Path("/{estado: [A-Z]+}/eleitos")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
-	public Resultados obterCandidatosEleitosPorEstado(@PathParam("estado") String uf) {
+	public Resultados obterCandidatosEleitosPorEstado(
+			@PathParam("estado") String uf) {
 		uf = uf.toUpperCase();
 		List<Candidato> candidatos = new ArrayList<Candidato>();
 		Resultados r;
 		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
 				"buscaCandidatoEleitoPorEleicaoEEstado", pgNum,
 				dao.buscaEleicao(anoEleicao), dao.buscaEstado(uf));
-		r = new Resultados(pgNum, candidatos.size(), "Todos Candidatos eleitos de "
-				+ uf.toUpperCase() , candidatos);
+		r = new Resultados(pgNum, candidatos.size(),
+				"Todos Candidatos eleitos de " + uf.toUpperCase(), candidatos);
 		return r;
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Path("/")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados obterTodosCandidato() {
 		List<Candidato> candidatos = new ArrayList<Candidato>();
 		Resultados r;
 
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoPorEleicao", pgNum, dao.buscaEleicao(anoEleicao));
+		candidatos = (List<Candidato>) dao
+				.retornaDadosPorNamedQuery("buscaCandidatoPorEleicao", pgNum,
+						dao.buscaEleicao(anoEleicao));
 		r = new Resultados(pgNum, candidatos.size(), "Todos Candidatos",
 				candidatos);
 		r.setTotalResultados(dao.conta("Candidato"));
 		return r;
 	}
+
 	@SuppressWarnings("unchecked")
 	@Path("/eleitos")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados obterTodosCandidatosEleitos() {
 		List<Candidato> candidatos = new ArrayList<Candidato>();
 		Resultados r;
-		candidatos = (List<Candidato>)dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoEleitoPorEleicao", pgNum, dao.buscaEleicao(anoEleicao));
-		r = new Resultados(pgNum, candidatos.size(), "Todos Candidatos eleitos",
-				candidatos);
+		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+				"buscaCandidatoEleitoPorEleicao", pgNum,
+				dao.buscaEleicao(anoEleicao));
+		r = new Resultados(pgNum, candidatos.size(),
+				"Todos Candidatos eleitos", candidatos);
 		r.setTotalResultados(dao.conta("Candidato"));
 		return r;
 	}
@@ -103,14 +106,15 @@ public class CandidatoRecurso {
 	@SuppressWarnings("unchecked")
 	@Path("/{estado}/{cargo}")
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Resultados candidatosRegiaoCargo(@PathParam("estado") String strUf,
 			@PathParam("cargo") String strCargo) {
 		List<Candidato> candidatos = new ArrayList<Candidato>();
 		Resultados r;
 		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
 				"buscaCandidatoPorEleicaoEEstadoECargo", pgNum,
-				dao.buscaEleicao(anoEleicao), dao.buscaEstado(strUf.toUpperCase()),
+				dao.buscaEleicao(anoEleicao),
+				dao.buscaEstado(strUf.toUpperCase()),
 				dao.buscaCargo(strCargo.toUpperCase()));
 		r = new Resultados(pgNum, candidatos.size(), "Candidatos para o cargo "
 				+ strCargo + " (" + strUf.toUpperCase() + ")", candidatos);
@@ -120,7 +124,7 @@ public class CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	@Path("/{estado}/{cargo}/{partido}")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados candidatosRegiaoCargoPartido(
 			@PathParam("estado") String strUf,
@@ -130,17 +134,18 @@ public class CandidatoRecurso {
 		Resultados r;
 		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
 				"buscaCandidatoPorEleicaoEEstadoECargoEPartido", pgNum,
-				dao.buscaEleicao(anoEleicao), dao.buscaEstado(strUf.toUpperCase()),
-				dao.buscaCargo(strCargo), dao.buscaPartido(strPartido));
+				dao.buscaEleicao(anoEleicao),
+				dao.buscaEstado(strUf.toUpperCase()), dao.buscaCargo(strCargo),
+				dao.buscaPartido(strPartido));
 		r = new Resultados(pgNum, candidatos.size(), "Candidatos para o cargo "
 				+ strCargo + " (" + strUf.toUpperCase() + ") do partido "
 				+ strPartido.toUpperCase(), candidatos);
 		return r;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Path("/{estado}/{cargo}/{partido}/eleitos")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados candidatosEleitosRegiaoCargoPartido(
 			@PathParam("estado") String strUf,
@@ -150,8 +155,9 @@ public class CandidatoRecurso {
 		Resultados r;
 		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
 				"buscaCandidatoEleitoPorEleicaoEEstadoECargoEPartido", pgNum,
-				dao.buscaEleicao(anoEleicao), dao.buscaEstado(strUf.toUpperCase()),
-				dao.buscaCargo(strCargo), dao.buscaPartido(strPartido));
+				dao.buscaEleicao(anoEleicao),
+				dao.buscaEstado(strUf.toUpperCase()), dao.buscaCargo(strCargo),
+				dao.buscaPartido(strPartido));
 		r = new Resultados(pgNum, candidatos.size(),
 				"Candidatos eleitos para o cargo " + strCargo + " ("
 						+ strUf.toUpperCase() + ") do partido "
@@ -162,7 +168,7 @@ public class CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	@Path("{estado}/{cargo}/eleitos")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados candidatosEleitosRegiaoCargo(
 			@PathParam("estado") String strUf,
@@ -171,7 +177,8 @@ public class CandidatoRecurso {
 		Resultados r;
 		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
 				"buscaCandidatoEleitoPorEleicaoEEstadoECargo", pgNum,
-				dao.buscaEleicao(anoEleicao), dao.buscaEstado(strUf.toUpperCase()),
+				dao.buscaEleicao(anoEleicao),
+				dao.buscaEstado(strUf.toUpperCase()),
 				dao.buscaCargo(strCargo.toUpperCase()));
 		r = new Resultados(pgNum, candidatos.size(),
 				"Candidatos eleitos para o cargo " + strCargo + " ("
@@ -181,13 +188,15 @@ public class CandidatoRecurso {
 	}
 
 	@Path("/busca")
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados busca(@QueryParam("nome") String nome,
 			@QueryParam("partido") String strPartido,
-			@QueryParam("cargo") String strCargo, @QueryParam("uf") String strUf, @QueryParam("resultadoEleicao") String strResultado) {
-		return dao.busca(nome, strPartido, strCargo, strUf, strResultado, pgNum);
+			@QueryParam("cargo") String strCargo,
+			@QueryParam("uf") String strUf,
+			@QueryParam("resultadoEleicao") String strResultado) {
+		return dao
+				.busca(nome, strPartido, strCargo, strUf, strResultado, pgNum);
 	}
 
-	
 }
