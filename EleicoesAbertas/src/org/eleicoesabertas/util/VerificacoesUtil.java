@@ -1,4 +1,4 @@
-package org.eleicoesabertas.recursos;
+package org.eleicoesabertas.util;
 
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
@@ -9,7 +9,7 @@ import org.eleicoesabertas.definicoes.Mensagens;
 
 
 
-public class Verificacoes {
+public class VerificacoesUtil {
 
 	public String verificaChave(@QueryParam("chave") String chave) {
 		if (chave == null) {

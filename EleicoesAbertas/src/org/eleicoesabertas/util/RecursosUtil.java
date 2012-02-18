@@ -1,4 +1,4 @@
-package org.eleicoesabertas.recursos;
+package org.eleicoesabertas.util;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

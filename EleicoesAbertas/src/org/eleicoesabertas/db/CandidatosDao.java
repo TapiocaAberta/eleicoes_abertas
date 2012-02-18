@@ -19,9 +19,9 @@ import org.eleicoesabertas.model.Estado;
 import org.eleicoesabertas.model.Partido;
 import org.eleicoesabertas.model.ResultadoEleicao;
 import org.eleicoesabertas.model.Resultados;
-import org.eleicoesabertas.recursos.DefinicoesServicos;
-import org.eleicoesabertas.recursos.RecursosUtil;
+import org.eleicoesabertas.recursos.impl.DefinicoesServicos;
 import org.eleicoesabertas.util.EmUtil;
+import org.eleicoesabertas.util.RecursosUtil;
 
 /**
  * 
