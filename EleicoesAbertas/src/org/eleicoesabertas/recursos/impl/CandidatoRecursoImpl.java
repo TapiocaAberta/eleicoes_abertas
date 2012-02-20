@@ -21,6 +21,7 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 	int pgNum;
 
 	public CandidatoRecursoImpl() {
+
 		// TODO: you know... remove it and start using CDI
 		dao = new CandidatosDao();
 	}

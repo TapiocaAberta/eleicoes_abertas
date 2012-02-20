@@ -4,6 +4,7 @@ package org.eleicoesabertas.db;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -33,9 +34,11 @@ import org.eleicoesabertas.util.RecursosUtil;
 public class CandidatosDao {
 
 	EntityManager em;
+	Logger logger;
 	
 	public CandidatosDao(){
 		em = EmUtil.getEntityManager();
+		logger = Logger.getLogger(this.getClass().getName());
 	}
 
 	public ResultadoEleicao buscaResultadoEleicao(String strResultado) {
