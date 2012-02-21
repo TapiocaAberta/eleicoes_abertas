@@ -1,6 +1,4 @@
 package org.eleicoesabertas.db;
- 
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,107 +24,113 @@ import org.eleicoesabertas.util.RecursosUtil;
 
 /**
  * 
- * This class is responsible to perfom all operation with the database in a stateles way. All.
+ * This class is responsible to perfom all operation with the database in a
+ * stateles way. All.
+ * 
  * @author William AntÙnio
- *
+ * 
  */
 
 public class CandidatosDao {
 
 	EntityManager em;
 	Logger logger;
-	
-	public CandidatosDao(){
+
+	public CandidatosDao() {
 		em = EmUtil.getEntityManager();
 		logger = Logger.getLogger(this.getClass().getName());
 	}
 
+	/**
+	 * Busca um resultado de eleiÁ„o de acordo com o texto. Retorna nulo se nada
+	 * for encontrado
+	 * 
+	 * @param strResultado
+	 * @return
+	 */
 	public ResultadoEleicao buscaResultadoEleicao(String strResultado) {
 		ResultadoEleicao resultadoEleicao = null;
-		try {
-			resultadoEleicao = (ResultadoEleicao) em
-					.createNamedQuery("buscaResultadoEleicaoPorNome")
-					.setParameter(1, strResultado).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			lancaErroPorExcecao(e, "Resultado de elei√ß√£o n√£o encontrado!");
-		}
+		resultadoEleicao = (ResultadoEleicao) em
+				.createNamedQuery("buscaResultadoEleicaoPorNome")
+				.setParameter(1, strResultado).getSingleResult();
 		return resultadoEleicao;
 	}
 
+	/**
+	 *  Busca uma eleiÁ„o. Retorna nulo se nada
+	 * for encontrado
+	 * @param anoEleicao
+	 * @return
+	 */
 	public Eleicao buscaEleicao(String anoEleicao) {
 		Eleicao eleicao = null;
-		try {
-			eleicao = (Eleicao) em.createNamedQuery("buscaEleicaoPorAno")
-					.setParameter(1, anoEleicao).getSingleResult();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-			lancaErroPorExcecao(e, "Dados para essa elei√ß√£o n√£o existentes!");
-		}
+		eleicao = (Eleicao) em.createNamedQuery("buscaEleicaoPorAno")
+				.setParameter(1, anoEleicao).getSingleResult();
 		return eleicao;
 	}
 
+	/**
+	 * Busca um entidade qualquer, um resultado ˙nico, e retorna nulo se nada for encontrado
+	 * @param oq
+	 * @param campo
+	 * @param valor
+	 * @param nomeAmigavel
+	 * @return
+	 */
 	public Object buscaUm(String oq, String campo, String valor,
 			String nomeAmigavel) {
 		Object obj = null;
-		try {
-			obj = em.createQuery(
-					"SELECT o FROM " + oq + " WHERE o." + campo + " = ?1")
-					.setParameter(1, valor).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			lancaErroPorExcecao(e, "Dados para " + nomeAmigavel + " igual a "
-					+ valor + " n√£o existentes!");
-		}
+		obj = em.createQuery(
+				"SELECT o FROM " + oq + " WHERE o." + campo + " = ?1")
+				.setParameter(1, valor).getSingleResult();
 		return obj;
 	}
 
+	/**
+	 * Tenta recuperar um candidato de ID id. Retorna nulo se nada for encontrado
+	 * @param id
+	 * @return
+	 */
 	public Candidato obterCandidato(int id) {
 		Candidato candidato = null;
-		try {
-			candidato = (Candidato) em.createNamedQuery("buscaCandidatoPorId")
-					.setParameter(1, id).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			lancaErroPorExcecao(e, "N„o encontrado candidato com esse ID");
-		}
+		candidato = (Candidato) em.createNamedQuery("buscaCandidatoPorId")
+				.setParameter(1, id).getSingleResult();
 		return candidato;
 	}
 
+	/**
+	 * Tenta recuperar partido. Retorna nulo se nada for encontrado
+	 * @param strPartido
+	 * @return
+	 */
 	public Partido buscaPartido(String strPartido) {
 		Partido partido = null;
-		try {
-			partido = (Partido) em.createNamedQuery("buscaPartidoPorSigla")
-					.setParameter(1, strPartido).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			lancaErroPorExcecao(e, "Partido n√£o encontrado");
-		}
+		partido = (Partido) em.createNamedQuery("buscaPartidoPorSigla")
+				.setParameter(1, strPartido).getSingleResult();
 		return partido;
 	}
 
+	/**
+	 * Tenta recuperar um estado. Retorna nulo se nada for encontrado
+	 * @param uf
+	 * @return
+	 */
 	public Estado buscaEstado(String uf) {
 		Estado estado = null;
-		try {
-			estado = (Estado) em.createNamedQuery("buscaEstadoPorUF")
-					.setParameter(1, uf).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			lancaErroPorExcecao(e, "Estado n√£o encontrado");
-		}
+		estado = (Estado) em.createNamedQuery("buscaEstadoPorUF")
+				.setParameter(1, uf).getSingleResult();
 		return estado;
 	}
 
+	/**
+	 * Tenta recuperar o cargo. Retorna nulo se nada for encontrado
+	 * @param strCargo
+	 * @return
+	 */
 	public Cargo buscaCargo(String strCargo) {
 		Cargo cargo = null;
-		try {
-			cargo = (Cargo) em.createNamedQuery("buscaCargoPorNome")
-					.setParameter(1, strCargo).getSingleResult();
-		} catch (Exception e) {
-			e.printStackTrace();
-			lancaErroPorExcecao(e, "Cargo n√£o encontrado");
-		}
+		cargo = (Cargo) em.createNamedQuery("buscaCargoPorNome")
+				.setParameter(1, strCargo).getSingleResult();
 		return cargo;
 	}
 
@@ -160,11 +164,11 @@ public class CandidatosDao {
 
 	@SuppressWarnings("unchecked")
 	public Resultados busca(String nome, String strPartido, String strCargo,
-			String strUf, String strResultado, int pgNum) {	
+			String strUf, String strResultado, int pgNum) {
 		Partido p = null;
 		Cargo c = null;
 		Estado e = null;
-		ResultadoEleicao rs = null; //rsrsrsrsrsrsrs
+		ResultadoEleicao rs = null; // rsrsrsrsrsrsrs
 		ArrayList<Object> parametros = new ArrayList<Object>();
 
 		if (RecursosUtil.checa(nome, 3))
@@ -179,7 +183,7 @@ public class CandidatosDao {
 		if (!RecursosUtil.checa(strUf))
 			e = buscaEstado(strUf);
 		if (!RecursosUtil.checa(strResultado))
-			rs = buscaResultadoEleicao(strResultado);		
+			rs = buscaResultadoEleicao(strResultado);
 		StringBuffer sbQuery = new StringBuffer();
 		nome = "%" + nome + "%";
 		sbQuery.append("SELECT c FROM Candidato c WHERE c.nome like ?1");
@@ -221,26 +225,8 @@ public class CandidatosDao {
 		candidatos = (List<Candidato>) executaQueryPaginada(q, pgNum);
 		r = new Resultados(pgNum, candidatos.size(), "Busca de candidatos",
 				candidatos);
-		r.setTotalResultados(Long.parseLong( qContagem
-				.getSingleResult().toString()));
+		r.setTotalResultados(Long.parseLong(qContagem.getSingleResult()
+				.toString()));
 		return r;
-	}
-	
-	
-	public void lancaErro(String mensagem) {
-		lancaErro(mensagem, Status.BAD_REQUEST);
-	}
-
-	public void lancaErroPorExcecao(Exception e, String mensagem) {
-		if (e instanceof javax.persistence.NoResultException)
-			lancaErro(mensagem, Status.BAD_REQUEST);
-		else
-			lancaErro(
-					"Erro conectando ao banco de dados, desculpe-nos o inc√¥modo. Contate o administrador do sistema se o erro persistir...",
-					Status.INTERNAL_SERVER_ERROR);
-
-	}
-	
-
-
+	}	
 }

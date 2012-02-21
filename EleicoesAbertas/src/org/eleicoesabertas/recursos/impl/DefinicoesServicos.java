@@ -9,7 +9,7 @@ package org.eleicoesabertas.recursos.impl;
  */
 public class DefinicoesServicos {
 	/**
-	 * O tamanho default das páginas
+	 * O tamanho default das páginas a cada requisição
 	 * */
 	public static final int TAMANHO_PAGINA = 10;
 }

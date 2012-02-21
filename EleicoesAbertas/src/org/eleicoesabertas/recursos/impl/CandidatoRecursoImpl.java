@@ -3,8 +3,10 @@ package org.eleicoesabertas.recursos.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 
 import org.eleicoesabertas.db.CandidatosDao;
 import org.eleicoesabertas.model.Candidato;
@@ -32,72 +34,95 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	public Resultados obterCandidatoPorEstado(@PathParam("estado") String uf) {
-		uf = uf.toUpperCase();
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoPorEleicaoEEstado", pgNum,
-				dao.buscaEleicao(anoEleicao), dao.buscaEstado(uf));
-		r = new Resultados(pgNum, candidatos.size(), "Todos Candidatos de "
-				+ uf.toUpperCase(), candidatos);
-		return r;
+		try {
+			uf = uf.toUpperCase();
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoPorEleicaoEEstado", pgNum,
+					dao.buscaEleicao(anoEleicao), dao.buscaEstado(uf));
+			r = new Resultados(pgNum, candidatos.size(), "Todos Candidatos de "
+					+ uf.toUpperCase(), candidatos);
+			return r;
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public Resultados obterCandidatosEleitosPorEstado(
 			@PathParam("estado") String uf) {
-		uf = uf.toUpperCase();
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoEleitoPorEleicaoEEstado", pgNum,
-				dao.buscaEleicao(anoEleicao), dao.buscaEstado(uf));
-		r = new Resultados(pgNum, candidatos.size(),
-				"Todos Candidatos eleitos de " + uf.toUpperCase(), candidatos);
-		return r;
+		try {
+			uf = uf.toUpperCase();
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoEleitoPorEleicaoEEstado", pgNum,
+					dao.buscaEleicao(anoEleicao), dao.buscaEstado(uf));
+			r = new Resultados(pgNum, candidatos.size(),
+					"Todos Candidatos eleitos de " + uf.toUpperCase(),
+					candidatos);
+			return r;
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public Resultados obterTodosCandidato() {
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
+		try {
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
 
-		candidatos = (List<Candidato>) dao
-				.retornaDadosPorNamedQuery("buscaCandidatoPorEleicao", pgNum,
-						dao.buscaEleicao(anoEleicao));
-		r = new Resultados(pgNum, candidatos.size(), "Todos Candidatos",
-				candidatos);
-		r.setTotalResultados(dao.conta("Candidato"));
-		return r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoPorEleicao", pgNum,
+					dao.buscaEleicao(anoEleicao));
+			r = new Resultados(pgNum, candidatos.size(), "Todos Candidatos",
+					candidatos);
+			r.setTotalResultados(dao.conta("Candidato"));
+			return r;
+		} catch (Exception e) {
+
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public Resultados obterTodosCandidatosEleitos() {
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoEleitoPorEleicao", pgNum,
-				dao.buscaEleicao(anoEleicao));
-		r = new Resultados(pgNum, candidatos.size(),
-				"Todos Candidatos eleitos", candidatos);
-		r.setTotalResultados(dao.conta("Candidato"));
-		return r;
+		try {
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoEleitoPorEleicao", pgNum,
+					dao.buscaEleicao(anoEleicao));
+			r = new Resultados(pgNum, candidatos.size(),
+					"Todos Candidatos eleitos", candidatos);
+			r.setTotalResultados(dao.conta("Candidato"));
+			return r;
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public Resultados candidatosRegiaoCargo(@PathParam("estado") String strUf,
 			@PathParam("cargo") String strCargo) {
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoPorEleicaoEEstadoECargo", pgNum,
-				dao.buscaEleicao(anoEleicao),
-				dao.buscaEstado(strUf.toUpperCase()),
-				dao.buscaCargo(strCargo.toUpperCase()));
-		r = new Resultados(pgNum, candidatos.size(), "Candidatos para o cargo "
-				+ strCargo + " (" + strUf.toUpperCase() + ")", candidatos);
+		try {
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoPorEleicaoEEstadoECargo", pgNum,
+					dao.buscaEleicao(anoEleicao),
+					dao.buscaEstado(strUf.toUpperCase()),
+					dao.buscaCargo(strCargo.toUpperCase()));
+			r = new Resultados(pgNum, candidatos.size(),
+					"Candidatos para o cargo " + strCargo + " ("
+							+ strUf.toUpperCase() + ")", candidatos);
 
-		return r;
+			return r;
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -105,17 +130,22 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 			@PathParam("estado") String strUf,
 			@PathParam("cargo") String strCargo,
 			@PathParam("partido") String strPartido) {
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoPorEleicaoEEstadoECargoEPartido", pgNum,
-				dao.buscaEleicao(anoEleicao),
-				dao.buscaEstado(strUf.toUpperCase()), dao.buscaCargo(strCargo),
-				dao.buscaPartido(strPartido));
-		r = new Resultados(pgNum, candidatos.size(), "Candidatos para o cargo "
-				+ strCargo + " (" + strUf.toUpperCase() + ") do partido "
-				+ strPartido.toUpperCase(), candidatos);
-		return r;
+		try {
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoPorEleicaoEEstadoECargoEPartido", pgNum,
+					dao.buscaEleicao(anoEleicao),
+					dao.buscaEstado(strUf.toUpperCase()),
+					dao.buscaCargo(strCargo), dao.buscaPartido(strPartido));
+			r = new Resultados(pgNum, candidatos.size(),
+					"Candidatos para o cargo " + strCargo + " ("
+							+ strUf.toUpperCase() + ") do partido "
+							+ strPartido.toUpperCase(), candidatos);
+			return r;
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -123,37 +153,46 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 			@PathParam("estado") String strUf,
 			@PathParam("cargo") String strCargo,
 			@PathParam("partido") String strPartido) {
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoEleitoPorEleicaoEEstadoECargoEPartido", pgNum,
-				dao.buscaEleicao(anoEleicao),
-				dao.buscaEstado(strUf.toUpperCase()), dao.buscaCargo(strCargo),
-				dao.buscaPartido(strPartido));
-		r = new Resultados(pgNum, candidatos.size(),
-				"Candidatos eleitos para o cargo " + strCargo + " ("
-						+ strUf.toUpperCase() + ") do partido "
-						+ strPartido.toUpperCase(), candidatos);
+		try {
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoEleitoPorEleicaoEEstadoECargoEPartido",
+					pgNum, dao.buscaEleicao(anoEleicao),
+					dao.buscaEstado(strUf.toUpperCase()),
+					dao.buscaCargo(strCargo), dao.buscaPartido(strPartido));
+			r = new Resultados(pgNum, candidatos.size(),
+					"Candidatos eleitos para o cargo " + strCargo + " ("
+							+ strUf.toUpperCase() + ") do partido "
+							+ strPartido.toUpperCase(), candidatos);
 
-		return r;
+			return r;
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public Resultados candidatosEleitosRegiaoCargo(
 			@PathParam("estado") String strUf,
 			@PathParam("cargo") String strCargo) {
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		Resultados r;
-		candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
-				"buscaCandidatoEleitoPorEleicaoEEstadoECargo", pgNum,
-				dao.buscaEleicao(anoEleicao),
-				dao.buscaEstado(strUf.toUpperCase()),
-				dao.buscaCargo(strCargo.toUpperCase()));
-		r = new Resultados(pgNum, candidatos.size(),
-				"Candidatos eleitos para o cargo " + strCargo + " ("
-						+ strUf.toUpperCase() + ")", candidatos);
+		try {
+			List<Candidato> candidatos = new ArrayList<Candidato>();
+			Resultados r;
+			candidatos = (List<Candidato>) dao.retornaDadosPorNamedQuery(
+					"buscaCandidatoEleitoPorEleicaoEEstadoECargo", pgNum,
+					dao.buscaEleicao(anoEleicao),
+					dao.buscaEstado(strUf.toUpperCase()),
+					dao.buscaCargo(strCargo.toUpperCase()));
+			r = new Resultados(pgNum, candidatos.size(),
+					"Candidatos eleitos para o cargo " + strCargo + " ("
+							+ strUf.toUpperCase() + ")", candidatos);
 
-		return r;
+			return r;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw trataErro(e);
+		}
 	}
 
 	public Resultados busca(@QueryParam("nome") String nome,
@@ -161,8 +200,19 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 			@QueryParam("cargo") String strCargo,
 			@QueryParam("uf") String strUf,
 			@QueryParam("resultadoEleicao") String strResultado) {
-		return dao
-				.busca(nome, strPartido, strCargo, strUf, strResultado, pgNum);
+		try {
+			return dao.busca(nome, strPartido, strCargo, strUf, strResultado,
+					pgNum);
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
+	}
+
+	private WebApplicationException trataErro(Exception e) {
+		if (e instanceof NoResultException)
+			return new WebApplicationException(404);
+		else
+			return new WebApplicationException(500);
 	}
 
 }
