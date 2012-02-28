@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.ws.rs.QueryParam;
 
-import org.eleicoesabertas.db.CandidatosDao;
+import org.eleicoesabertas.db.GeneralDao;
 import org.eleicoesabertas.model.Cargo;
 import org.eleicoesabertas.model.Coligacao;
 import org.eleicoesabertas.model.Ocupacao;
@@ -17,7 +17,7 @@ import org.eleicoesabertas.util.EmUtil;
 
 public class OutrosRecursosImpl implements OutrosRecursos {
 
-	CandidatosDao dao;
+	GeneralDao dao;
 	@QueryParam("pagina")
 	int pgNum;
 
@@ -26,7 +26,7 @@ public class OutrosRecursosImpl implements OutrosRecursos {
 	public OutrosRecursosImpl() {
 		super();
 		em = EmUtil.getEntityManager();
-		dao = new CandidatosDao();
+		dao = new GeneralDao();
 	}
 
 	public List<Cargo> cargos() {

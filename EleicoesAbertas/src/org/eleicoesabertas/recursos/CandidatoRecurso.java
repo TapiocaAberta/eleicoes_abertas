@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.eleicoesabertas.model.Candidato;
 import org.eleicoesabertas.model.Resultados;
+import static org.eleicoesabertas.recursos.impl.DefinicoesServicos.*;
 
 @Path("/{anoEleicao}/candidatos")
 public interface CandidatoRecurso {
@@ -18,19 +19,16 @@ public interface CandidatoRecurso {
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Candidato obterCandidatoPorId(@PathParam("id") int id);
 
-
 	@Path("/{estado: [A-Z]+}/")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
-	public Resultados obterCandidatoPorEstado(@PathParam("estado") String uf);
-
+	public Resultados obterCandidatoPorEstado(@PathParam(ESTADO) String uf);
 
 	@Path("/{estado: [A-Z]+}/eleitos")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados obterCandidatosEleitosPorEstado(
-			@PathParam("estado") String uf);
-
+			@PathParam(ESTADO) String uf);
 
 	@Path("/")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
@@ -42,45 +40,40 @@ public interface CandidatoRecurso {
 	@GET
 	public Resultados obterTodosCandidatosEleitos();
 
-
 	@Path("/{estado}/{cargo}")
 	@GET
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Resultados candidatosRegiaoCargo(@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo);
-
+	public Resultados candidatosRegiaoCargo(@PathParam(ESTADO) String strUf,
+			@PathParam(CARGO) String strCargo);
 
 	@Path("/{estado}/{cargo}/{partido}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados candidatosRegiaoCargoPartido(
-			@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo,
-			@PathParam("partido") String strPartido);
-
+			@PathParam(ESTADO) String strUf,
+			@PathParam(CARGO) String strCargo,
+			@PathParam(PARTIDO) String strPartido);
 
 	@Path("/{estado}/{cargo}/{partido}/eleitos")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados candidatosEleitosRegiaoCargoPartido(
-			@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo,
-			@PathParam("partido") String strPartido);
-
+			@PathParam(ESTADO) String strUf,
+			@PathParam(CARGO) String strCargo,
+			@PathParam(PARTIDO) String strPartido);
 
 	@Path("{estado}/{cargo}/eleitos")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados candidatosEleitosRegiaoCargo(
-			@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo);
+			@PathParam(ESTADO) String strUf, @PathParam(CARGO) String strCargo);
 
 	@Path("/busca")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@GET
 	public Resultados busca(@QueryParam("nome") String nome,
-			@QueryParam("partido") String strPartido,
-			@QueryParam("cargo") String strCargo,
+			@QueryParam(PARTIDO) String strPartido,
+			@QueryParam(CARGO) String strCargo,
 			@QueryParam("uf") String strUf,
 			@QueryParam("resultadoEleicao") String strResultado);
 }

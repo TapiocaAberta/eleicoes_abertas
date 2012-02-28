@@ -1,5 +1,6 @@
 package org.eleicoesabertas.util;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -32,6 +33,13 @@ public class RecursosUtil {
 
 	public static boolean checa(String str) {
 		return str == null || str.isEmpty();
+	}
+	
+	public static WebApplicationException trataErro(Exception e) {
+		if (e instanceof NoResultException)
+			return new WebApplicationException(404);
+		else
+			return new WebApplicationException(500);
 	}
 
 }

@@ -1,23 +1,27 @@
 package org.eleicoesabertas.recursos.impl;
 
+import static org.eleicoesabertas.recursos.impl.DefinicoesServicos.ANO_ELEICAO;
+import static org.eleicoesabertas.recursos.impl.DefinicoesServicos.CARGO;
+import static org.eleicoesabertas.recursos.impl.DefinicoesServicos.ESTADO;
+import static org.eleicoesabertas.recursos.impl.DefinicoesServicos.PARTIDO;
+import static org.eleicoesabertas.util.RecursosUtil.trataErro;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
 
-import org.eleicoesabertas.db.CandidatosDao;
+import org.eleicoesabertas.db.GeneralDao;
 import org.eleicoesabertas.model.Candidato;
 import org.eleicoesabertas.model.Resultados;
 import org.eleicoesabertas.recursos.CandidatoRecurso;
 
 public class CandidatoRecursoImpl implements CandidatoRecurso {
 
-	CandidatosDao dao;
+	GeneralDao dao;
 
-	@PathParam("anoEleicao")
+	@PathParam(ANO_ELEICAO)
 	String anoEleicao;
 	@QueryParam("pagina")
 	int pgNum;
@@ -25,15 +29,19 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 	public CandidatoRecursoImpl() {
 
 		// TODO: you know... remove it and start using CDI
-		dao = new CandidatosDao();
+		dao = new GeneralDao();
 	}
 
 	public Candidato obterCandidatoPorId(@PathParam("id") int id) {
-		return dao.obterCandidato(id);
+		try {
+			return dao.obterCandidato(id);
+		} catch (Exception e) {
+			throw trataErro(e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public Resultados obterCandidatoPorEstado(@PathParam("estado") String uf) {
+	public Resultados obterCandidatoPorEstado(@PathParam(ESTADO) String uf) {
 		try {
 			uf = uf.toUpperCase();
 			List<Candidato> candidatos = new ArrayList<Candidato>();
@@ -51,7 +59,7 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	public Resultados obterCandidatosEleitosPorEstado(
-			@PathParam("estado") String uf) {
+			@PathParam(ESTADO) String uf) {
 		try {
 			uf = uf.toUpperCase();
 			List<Candidato> candidatos = new ArrayList<Candidato>();
@@ -105,8 +113,8 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Resultados candidatosRegiaoCargo(@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo) {
+	public Resultados candidatosRegiaoCargo(@PathParam(ESTADO) String strUf,
+			@PathParam(CARGO) String strCargo) {
 		try {
 			List<Candidato> candidatos = new ArrayList<Candidato>();
 			Resultados r;
@@ -127,9 +135,8 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	public Resultados candidatosRegiaoCargoPartido(
-			@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo,
-			@PathParam("partido") String strPartido) {
+			@PathParam(ESTADO) String strUf, @PathParam(CARGO) String strCargo,
+			@PathParam(PARTIDO) String strPartido) {
 		try {
 			List<Candidato> candidatos = new ArrayList<Candidato>();
 			Resultados r;
@@ -150,9 +157,8 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	public Resultados candidatosEleitosRegiaoCargoPartido(
-			@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo,
-			@PathParam("partido") String strPartido) {
+			@PathParam(ESTADO) String strUf, @PathParam(CARGO) String strCargo,
+			@PathParam(PARTIDO) String strPartido) {
 		try {
 			List<Candidato> candidatos = new ArrayList<Candidato>();
 			Resultados r;
@@ -174,8 +180,7 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 
 	@SuppressWarnings("unchecked")
 	public Resultados candidatosEleitosRegiaoCargo(
-			@PathParam("estado") String strUf,
-			@PathParam("cargo") String strCargo) {
+			@PathParam(ESTADO) String strUf, @PathParam(CARGO) String strCargo) {
 		try {
 			List<Candidato> candidatos = new ArrayList<Candidato>();
 			Resultados r;
@@ -196,9 +201,8 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 	}
 
 	public Resultados busca(@QueryParam("nome") String nome,
-			@QueryParam("partido") String strPartido,
-			@QueryParam("cargo") String strCargo,
-			@QueryParam("uf") String strUf,
+			@QueryParam(PARTIDO) String strPartido,
+			@QueryParam(CARGO) String strCargo, @QueryParam("uf") String strUf,
 			@QueryParam("resultadoEleicao") String strResultado) {
 		try {
 			return dao.busca(nome, strPartido, strCargo, strUf, strResultado,
@@ -206,13 +210,6 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 		} catch (Exception e) {
 			throw trataErro(e);
 		}
-	}
-
-	private WebApplicationException trataErro(Exception e) {
-		if (e instanceof NoResultException)
-			return new WebApplicationException(404);
-		else
-			return new WebApplicationException(500);
 	}
 
 }

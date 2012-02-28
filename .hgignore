@@ -34,3 +34,5 @@ EleicoesAbertas/build/classes/org/eleicoesabertas/db/CandidatosDao.class
 EleicoesAbertas/build/classes/TesteNamedQuery.class
 EleicoesAbertas/build/classes/TesteEntidadesBasicas.class
 EleicoesAbertas/build/classes/TesteCandidato.class
+EleicoesAbertas/build/classes/org/eleicoesabertas/recursos/interceptores/InterceptorValidacao.class
+EleicoesAbertas/build/classes/org/eleicoesabertas/db/GeneralDao.class

@@ -31,12 +31,12 @@ import org.eleicoesabertas.util.RecursosUtil;
  * 
  */
 
-public class CandidatosDao {
+public class GeneralDao {
 
 	EntityManager em;
 	Logger logger;
 
-	public CandidatosDao() {
+	public GeneralDao() {
 		em = EmUtil.getEntityManager();
 		logger = Logger.getLogger(this.getClass().getName());
 	}
