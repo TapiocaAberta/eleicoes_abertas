@@ -13,12 +13,20 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
- <!-- Set this if you want Resteasy to scan for JAX-RS classes  -->
-    <context-param>
-        <param-name>resteasy.scan</param-name>
-        <param-value>true</param-value>
-    </context-param>
-  
+	<!-- Set this if you want Resteasy to scan for JAX-RS classes -->
+	<context-param>
+		<param-name>resteasy.scan</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!-- Vai mapear o parâmetro de URI para o cabeçalho, facilitando assim o 
+		debug de formatos embora isso não seja REST (informação de representação 
+		não vai na URI) -->
+	<context-param>
+		<param-name>resteasy.media.type.mappings</param-name>
+		<param-value>html : text/html, json : application/json, xml : application/xml</param-value>
+	</context-param>
+
 	<context-param>
 		<param-name>resteasy.servlet.mapping.prefix</param-name>
 		<param-value>/apiEleicoes/beta/</param-value>
