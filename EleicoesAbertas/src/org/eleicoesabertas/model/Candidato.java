@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
 		@NamedQuery(name = "buscaCandidatoPorEleicaoEEstado", query = "select c from Candidato c where c.eleicao = ?1 AND c.estado = ?2 ORDER BY c.nome"),
 		@NamedQuery(name = "buscaCandidatoEleitoPorEleicaoEEstado", query = "select c from Candidato c where c.eleicao = ?1 AND c.estado = ?2 "
 				+ "AND c.resultadoEleicao.resultadoEleicao = 'Eleito' ORDER BY c.nome"),
-		@NamedQuery(name = "buscaCandidatoPorId", query = "select c from Candidato c where c.id = ?1"),
+		@NamedQuery(name = "buscaCandidatoPorId", query = "select c from Candidato c where c.eleicao = ?1 AND c.id = ?2"),
 		@NamedQuery(name = "buscaCandidatoPorEleicaoENome", query = "select c from Candidato c where c.eleicao = ?1 AND c.nome LIKE ?2 ORDER BY c.nome"),
 		@NamedQuery(name = "buscaCandidatoPorEleicaoEEstadoECargo", query = "select c from Candidato c "
 				+ "where c.eleicao = ?1 AND c.estado = ?2 AND c.cargo = ?3 ORDER BY c.nome"),

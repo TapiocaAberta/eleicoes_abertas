@@ -17,6 +17,8 @@ import org.eleicoesabertas.model.Candidato;
 import org.eleicoesabertas.model.Resultados;
 import org.eleicoesabertas.recursos.CandidatoRecurso;
 
+//TODO evitar esse monte de chamada ao dao.busca*, muito feio isso...
+
 public class CandidatoRecursoImpl implements CandidatoRecurso {
 
 	GeneralDao dao;
@@ -34,7 +36,7 @@ public class CandidatoRecursoImpl implements CandidatoRecurso {
 
 	public Candidato obterCandidatoPorId(@PathParam("id") int id) {
 		try {
-			return dao.obterCandidato(id);
+			return dao.obterCandidato(dao.buscaEleicao(anoEleicao),id);
 		} catch (Exception e) {
 			throw trataErro(e);
 		}

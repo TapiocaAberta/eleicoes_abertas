@@ -31,15 +31,31 @@ public class TestaTodosRecursosREST {
 
 	@Test
 	public void todosTestes() throws Exception {
+		
+		//404, typo on candidatos
+		assertEquals(404, fazerRequest("/2010/candidatus"));
+
 		//OK
 		assertEquals(200, fazerRequest("/2010/candidatos"));
 		assertEquals(200, fazerRequest("/2010/candidatos/1"));		
 		
 		//Not found
-		assertEquals(404, fazerRequest("/2010/candidatos/6666"));
+		assertEquals(404, fazerRequest("/2010/candidatos/99999"));
 		
-		//It's wrong, it is returning 200, it was supposed to 404 our bad request... Shame on me.
+		//NOt found found because of the year and candidate
 		assertEquals(404, fazerRequest("/3100/candidatos/6666"));
+		
+		//NOt found found because of the year
+		assertEquals(404, fazerRequest("/3100/candidatos/"));
+		
+		//OK
+		assertEquals(200, fazerRequest("/2010/candidatos/SP"));
+		
+		//404 because of the non existing state
+		assertEquals(404, fazerRequest("/2010/candidatos/XZ"));
+		
+		//404, existing state with invalid year
+		assertEquals(404, fazerRequest("/3900/candidatos/SP"));		
 		
 		//TODO: Continue tests
 /*

@@ -6,14 +6,10 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.eleicoesabertas.model.Candidato;
 import org.eleicoesabertas.model.Cargo;
 import org.eleicoesabertas.model.Eleicao;
-import org.eleicoesabertas.model.Erro;
 import org.eleicoesabertas.model.Estado;
 import org.eleicoesabertas.model.Partido;
 import org.eleicoesabertas.model.ResultadoEleicao;
@@ -91,10 +87,10 @@ public class GeneralDao {
 	 * @param id
 	 * @return
 	 */
-	public Candidato obterCandidato(int id) {
+	public Candidato obterCandidato(Eleicao eleicao, int id) {
 		Candidato candidato = null;
 		candidato = (Candidato) em.createNamedQuery("buscaCandidatoPorId")
-				.setParameter(1, id).getSingleResult();
+				.setParameter(1, eleicao).setParameter(2, id).getSingleResult();
 		return candidato;
 	}
 
@@ -157,10 +153,7 @@ public class GeneralDao {
 				.getSingleResult();
 	}
 
-	public void lancaErro(String mensagem, Status status) {
-		throw new WebApplicationException(Response.status(status)
-				.entity(new Erro(mensagem)).build());
-	}
+	
 
 	@SuppressWarnings("unchecked")
 	public Resultados busca(String nome, String strPartido, String strCargo,

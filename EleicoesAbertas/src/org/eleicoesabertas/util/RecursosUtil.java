@@ -34,12 +34,17 @@ public class RecursosUtil {
 	public static boolean checa(String str) {
 		return str == null || str.isEmpty();
 	}
-	
+
 	public static WebApplicationException trataErro(Exception e) {
-		if (e instanceof NoResultException)
+		if (e instanceof NoResultException) {
+			//Não é necessário printar o stack trace, erro previsto
 			return new WebApplicationException(404);
-		else
+		} else {
+			// Printa o stack trace para saber o que aconteceu
+			e.printStackTrace();
 			return new WebApplicationException(500);
+		}
+
 	}
 
 }
