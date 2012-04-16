@@ -185,7 +185,7 @@ temos as seguintes URIs para acesso aos dados dos candidatos</p>
 		<tr>
 			<td><a href=apiEleicoes/beta/2010/ocupacao target="_new">/ocupacao</a></td>
 
-			<td>Todos os ocupações que dos candidatos</td>
+			<td>Todos os ocupações dos candidatos</td>
 			<td>pagina</td>
 		</tr>
 	</tbody>
@@ -193,12 +193,13 @@ temos as seguintes URIs para acesso aos dados dos candidatos</p>
 
 <h3>Tipo de retorno</h3>
 
-<p>Atualmente os resultados são devolvidos apenas em <a
+<p>Os resultados são apresentados no formato <a
 	href="http://pt.wikipedia.org/wiki/XML"
-	title="Ver definição na Wikipedia">XML</a>. Um exemplo de retorno para
+	title="Ver definição na Wikipedia">XML</a> e <a href="http://pt.wikipedia.org/wiki/JSON">JSON</a>. Você pode adicionar <em>.json</em> em cada URL para ter o formato JSON ou configurar o
+	header <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">Accepts</a> da sua requisição para <em>application/json</em> Um exemplo de retorno XML para
 um candidato é mostrado na imagem abaixo:
 <p />
-<img src="ExemploXML.png"
+<img src="imagens/ExemploXML.png"
 	alt="Imagem de um exemplo do XML retornado pelo serviço de busca"
 	title="Imagem de um exemplo do XML retornado pelo serviço de busca" />
 <p class="legend">Imagem de um exemplo do XML retornado pelo serviço
@@ -206,6 +207,10 @@ de busca</p>
 <p><a href="downloads/exemploXML.pdf" title="Copiar">Baixar
 exemplo em PDF</a></p>
 
+<img src="imagens/ExemploJSON.png"
+	alt="Imagem de um exemplo do JSON retornado"
+	title="Imagem de um exemplo do JSON retornado" />
+<p class="legend">Imagem de um exemplo do JSON retornado</p>
 <h2>Aplicativos</h2>
 
 <p>Em breve...</p>

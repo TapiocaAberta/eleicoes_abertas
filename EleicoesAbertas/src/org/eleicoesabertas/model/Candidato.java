@@ -1,7 +1,5 @@
 package org.eleicoesabertas.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +52,7 @@ public class Candidato {
 	private String numeroEleicao;
 
 	@Column(name = "data_nascimento", nullable = false)
-	private Date dataNascimento;
+	private String dataNascimento;
 
 	@Column(name = "protocolo", nullable = false, length = 45)
 	private String protocolo;
@@ -134,7 +132,7 @@ public class Candidato {
 	}
 
 	public Candidato(String nome, String nomeUrna, String numeroEleicao,
-			Date dataNascimento, String protocolo, String processo,
+			String dataNascimento, String protocolo, String processo,
 			String cnpjCampanha, Situacao situacao, Sexo sexo, Partido partido,
 			Cargo cargo, Coligacao coligacao, Nacionalidade nacionalidade,
 			GrauInstrucao grauInstrucao, ResultadoEleicao resultadoEleicao,
@@ -194,11 +192,11 @@ public class Candidato {
 		this.numeroEleicao = numeroEleicao;
 	}
 
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

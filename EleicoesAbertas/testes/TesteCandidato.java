@@ -94,7 +94,7 @@ public class TesteCandidato {
 
 	@Test
 	public void testaCandidato() {		
-		Candidato c1 = new Candidato("João", "Jaummmm", "1233333", new Date(),
+		Candidato c1 = new Candidato("João", "Jaummmm", "1233333", new Date().toString(),
 				"123444444", "dklsdsd", "fdollk/32i3", situacao, sexo, partido,
 				cargo, coligacao, nacionalidade, grauInstrucao,
 				resultadoEleicao, estadoCivil, cidadeNascimento, estado,
@@ -102,7 +102,7 @@ public class TesteCandidato {
 
 		//situacao = (Situacao) em.createQuery("select s from Situacao s").getResultList().get(0);
 		Candidato c2 = new Candidato("Joãoff", "Jaummmmbb", "1233333vc",
-				new Date(), "123444444", "dklsdsd", "fdollk/32i3", situacao,
+				new Date().toString(), "123444444", "dklsdsd", "fdollk/32i3", situacao,
 				sexo, partido, cargo, null, nacionalidade, grauInstrucao,
 				resultadoEleicao, estadoCivil, cidadeNascimento, estado,
 				ocupacao, eleicao);

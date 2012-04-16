@@ -39,7 +39,12 @@ public class RecursosUtil {
 		if (e instanceof NoResultException) {
 			//Não é necessário printar o stack trace, erro previsto
 			return new WebApplicationException(404);
-		} else {
+		}
+		else if(e instanceof WebApplicationException){
+			return (WebApplicationException)e;
+		}
+		
+		else {
 			// Printa o stack trace para saber o que aconteceu
 			e.printStackTrace();
 			return new WebApplicationException(500);
