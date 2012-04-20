@@ -25,219 +25,249 @@
 
 </head>
 <body>
-<div id="wrapper">
+	<div id="wrapper">
 
-<div id="header">
-<h1><a href="/EleicoesAbertas"
-	title="Eleições 2010 - Candidatos como Serviço">Eleições 2010 -
-Candidatos como Serviço</a></h1>
-</div>
+		<div id="header">
+			<h1>
+				<a href="/EleicoesAbertas"
+					title="Eleições 2010 - Candidatos como Serviço">Eleições 2010 -
+					Candidatos como Serviço</a>
+			</h1>
+		</div>
 
-<div id="content">
+		<div id="content">
 
-<h2>Sabendo mais sobre os seus candidatos</h2>
-<p>As informações no site do <a
-	href="http://estatistica.tse.gov.br:7777/dwtse/f?p=201003:101:582575823234270::NO:::"
-	title="Link para o Site do TSE">Tribunal Superior Eleitoral - TSE</a>
-sobre os candidatos são bastante completas e acessíveis. No entanto, se
-você quiser acessar dados de seu candidato de forma programável, deverá
-ler os <a href="http://pt.wikipedia.org/wiki/Comma-separated_values"
-	title="Ver definição na Wikipedia">CSV's</a> dos candidatos ou fazer
-scrapping da página.</p>
+			<h2>Sabendo mais sobre os seus candidatos</h2>
+			<p>
+				As informações no site do <a
+					href="http://estatistica.tse.gov.br:7777/dwtse/f?p=201003:101:582575823234270::NO:::"
+					title="Link para o Site do TSE">Tribunal Superior Eleitoral -
+					TSE</a> sobre os candidatos são bastante completas e acessíveis. No
+				entanto, se você quiser acessar dados de seu candidato de forma
+				programável, deverá ler os <a
+					href="http://pt.wikipedia.org/wiki/Comma-separated_values"
+					title="Ver definição na Wikipedia">CSV's</a> dos candidatos ou
+				fazer scrapping da página.
+			</p>
+			<p>
+				Se você é desenvolvedor Java e gostaria de contribuir acesse o <a
+					href="https://bitbucket.org/williamAntonio/elei-es-abertas">código</a>
+				da aplicação.
 
+			</p>
+			<p>
+				Explore Toda a API com essa <a href=api-explorer/>aplicação</a>.
+			</p>
+			<h2>Candidatos como serviço!</h2>
+			<p>
+				Nosso objetivo é apresentar dados dos candidatos como serviços <a
+					href="http://pt.wikipedia.org/wiki/REST"
+					title="Ver definição na Wikipedia">WEB REST</a>. Assim fica mais
+				fácil de criar aplicações com dados de seus candidatos.
+			</p>
+			<h3>Algumas considerações:</h3>
 
-<h2>Candidatos como serviço!</h2>
-<p>Nosso objetivo é apresentar dados dos candidatos como serviços <a
-	href="http://pt.wikipedia.org/wiki/REST"
-	title="Ver definição na Wikipedia">WEB REST</a>. Assim fica mais fácil
-de criar aplicações com dados de seus candidatos.</p>
-<h3>Algumas considerações:</h3>
+			<ul>
+				<li>Todos resultado são paginados e a paginação é feita pela
+					parâmetro "<em>pagina</em>".
+				</li>
+				<li>O método <a
+					href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol"
+					title="Ver definição na Wikipedia">HTTP</a> de acesso é sempre <em><a
+						href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9todos"
+						title="Ver definição na Wikipedia">GET</a></em></li>
+			</ul>
 
-<ul>
-	<li>Todos resultado são paginados e a paginação é feita pela
-	parâmetro "<em>pagina</em>".</li>
-	<li>O método <a
-		href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol"
-		title="Ver definição na Wikipedia">HTTP</a> de acesso é sempre <em><a
-		href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol#M.C3.A9todos"
-		title="Ver definição na Wikipedia">GET</a></em></li>
-</ul>
+			<h3>As URIs</h3>
 
-<h3>As URIs</h3>
+			<p>
+				Considerando a URL base <a
+					href="http://williamprogrammer.com/EleicoesAbertas/apiEleicoes/beta/2010/"
+					title="URL Base do Serviço">http://williamprogrammer.com/EleicoesAbertas/apiEleicoes/beta/2010/</a>,
+				temos as seguintes URIs para acesso aos dados dos candidatos
+			</p>
 
-<p>Considerando a URL base <a
-	href="http://williamprogrammer.com/EleicoesAbertas/apiEleicoes/beta/2010/"
-	title="URL Base do Serviço">http://williamprogrammer.com/EleicoesAbertas/apiEleicoes/beta/2010/</a>,
-temos as seguintes URIs para acesso aos dados dos candidatos</p>
+			<table>
+				<thead>
+					<tr>
+						<th>URI</th>
+						<th>Descrição</th>
+						<th>Parâmetros aceitos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/candidatos target="_new">/candidatos</a></td>
+						<td>Retorna todos os candidatos</td>
+						<td>pagina: recebe um número inteiro indicando a página que
+							você está acessando</td>
+					</tr>
+					<tr>
+						<td><a
+							href=apiEleicoes/beta/2010/candidatos/busca?nome=DIlMA%20VANA
+							target="_new">/candidatos/busca</a></td>
+						<td>Busca candidatos de acordo com nome</td>
+						<td>pagina: conforme já descrito nome: O nome ou parte do
+							nome para busca(usaremos um simples LIKE para realizar a busca).
+							Esse parâmetro é obrigatório para a busca partido: O partido do
+							candidato conforme retorno da URI /partido cargo: Um cargo
+							conforme retorno de /cargo resultadoEleicao: O resultado da
+							eleição conforme retorno da URI /resultadoEleicao</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/candidatos/eleitos
+							target="_new">/candidatos/eleitos</a></td>
+						<td>Retorna todos os candidatos eleitos</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/candidatos/1 target="_new">/candidatos/{id}</a></td>
+						<td>Retorna um único candidato onde {id} é o Id do candidato</td>
+						<td>-</td>
+					</tr>
+					<tr>
 
-<table>
-	<thead>
-		<tr>
-			<th>URI</th>
-			<th>Descrição</th>
-			<th>Parâmetros aceitos</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/candidatos target="_new">/candidatos</a></td>
-			<td>Retorna todos os candidatos</td>
-			<td>pagina: recebe um número inteiro indicando a página que você
-			está acessando</td>
-		</tr>
-		<tr>
-			<td><a
-				href=apiEleicoes/beta/2010/candidatos/busca?nome=DIlMA%20VANA
-				target="_new">/candidatos/busca</a></td>
-			<td>Busca candidatos de acordo com nome</td>
-			<td>pagina: conforme já descrito nome: O nome ou parte do nome
-			para busca(usaremos um simples LIKE para realizar a busca). Esse
-			parâmetro é obrigatório para a busca partido: O partido do candidato
-			conforme retorno da URI /partido cargo: Um cargo conforme retorno de
-			/cargo resultadoEleicao: O resultado da eleição conforme retorno da
-			URI /resultadoEleicao</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/candidatos/eleitos
-				target="_new">/candidatos/eleitos</a></td>
-			<td>Retorna todos os candidatos eleitos</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/candidatos/1 target="_new">/candidatos/{id}</a></td>
-			<td>Retorna um único candidato onde {id} é o Id do candidato</td>
-			<td>-</td>
-		</tr>
-		<tr>
+						<td><a href=apiEleicoes/beta/2010/candidatos/SP target="_new">/candidatos/{estado}</a></td>
+						<td>Retorna os candidatos de um determinado estado onde
+							{estado} é a sigla do estado (sempre em maiusculo).</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/candidatos/SP/eleitos
+							target="_new">/candidatos/{estado}/eleitos</a></td>
+						<td>Como em /candidatos/{estado}, no entanto, retorna só os
+							candidatos eleitos</td>
 
-			<td><a href=apiEleicoes/beta/2010/candidatos/SP target="_new">/candidatos/{estado}</a></td>
-			<td>Retorna os candidatos de um determinado estado onde {estado}
-			é a sigla do estado (sempre em maiusculo).</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/candidatos/SP/eleitos
-				target="_new">/candidatos/{estado}/eleitos</a></td>
-			<td>Como em /candidatos/{estado}, no entanto, retorna só os
-			candidatos eleitos</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/candidatos/BR/Presidente
+							target="_new">/candidatos/{estado}/{cargo}</a></td>
+						<td>Traz os candidatos dado o {estado} e o {cargo}</td>
+						<td>pagina</td>
+					</tr>
 
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/candidatos/BR/Presidente
-				target="_new">/candidatos/{estado}/{cargo}</a></td>
-			<td>Traz os candidatos dado o {estado} e o {cargo}</td>
-			<td>pagina</td>
-		</tr>
+					<tr>
+						<td><a
+							href=apiEleicoes/beta/2010/candidatos/BR/Presidente/eleitos
+							target="_new">/candidatos/{estado}/{cargo}/eleitos</a></td>
+						<td>Traz os candidatos eleitos dado o {estado} e o {cargo}</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a
+							href=apiEleicoes/beta/2010/candidatos/SP/Deputado%20Estadual/PV
+							target="_new">/candidatos/{estado}/{cargo}/{partido}</a></td>
 
-		<tr>
-			<td><a
-				href=apiEleicoes/beta/2010/candidatos/BR/Presidente/eleitos
-				target="_new">/candidatos/{estado}/{cargo}/eleitos</a></td>
-			<td>Traz os candidatos eleitos dado o {estado} e o {cargo}</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a
-				href=apiEleicoes/beta/2010/candidatos/SP/Deputado%20Estadual/PV
-				target="_new">/candidatos/{estado}/{cargo}/{partido}</a></td>
+						<td>Traz os candidatos dado o {estado}, {cargo} e o
+							{partido}, sendo que partido corresponde a sigla do mesmo</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a
+							href=apiEleicoes/beta/2010/candidatos/SP/Deputado%20Estadual/PV/eleitos
+							target="_new">/candidatos/{estado}/{cargo}/{partido}/eleitos</a></td>
+						<td>Mesma situação descrita para a URI
+							/candidatos/{estado}/{cargo}/{partido}/, mas traz somente os
+							eleitos</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/cargo target="_new">/cargo<a></td>
+						<td>Todos os cargos</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
 
-			<td>Traz os candidatos dado o {estado}, {cargo} e o {partido},
-			sendo que partido corresponde a sigla do mesmo</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a
-				href=apiEleicoes/beta/2010/candidatos/SP/Deputado%20Estadual/PV/eleitos
-				target="_new">/candidatos/{estado}/{cargo}/{partido}/eleitos</a></td>
-			<td>Mesma situação descrita para a URI
-			/candidatos/{estado}/{cargo}/{partido}/, mas traz somente os eleitos</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/cargo target="_new">/cargo<a></td>
-			<td>Todos os cargos</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
+						<td><a href=apiEleicoes/beta/2010/partido target="_new">/partido</a></td>
+						<td>Todos os partidos</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/coligacao target="_new">/coligacao</a></td>
+						<td>Todos as coligações</td>
 
-			<td><a href=apiEleicoes/beta/2010/partido target="_new">/partido</a></td>
-			<td>Todos os partidos</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/coligacao target="_new">/coligacao</a></td>
-			<td>Todos as coligações</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/situacao target="_new">/situacao</a></td>
+						<td>Todos as situações</td>
+						<td>pagina</td>
+					</tr>
 
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/situacao target="_new">/situacao</a></td>
-			<td>Todos as situações</td>
-			<td>pagina</td>
-		</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/resultadoEleicao
+							target="_new">/resultadoEleicao</a></td>
+						<td>Todos os resultados possíveis para a eleição</td>
+						<td>pagina</td>
+					</tr>
+					<tr>
+						<td><a href=apiEleicoes/beta/2010/ocupacao target="_new">/ocupacao</a></td>
 
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/resultadoEleicao target="_new">/resultadoEleicao</a></td>
-			<td>Todos os resultados possíveis para a eleição</td>
-			<td>pagina</td>
-		</tr>
-		<tr>
-			<td><a href=apiEleicoes/beta/2010/ocupacao target="_new">/ocupacao</a></td>
+						<td>Todos os ocupações dos candidatos</td>
+						<td>pagina</td>
+					</tr>
+				</tbody>
+			</table>
 
-			<td>Todos os ocupações dos candidatos</td>
-			<td>pagina</td>
-		</tr>
-	</tbody>
-</table>
+			<h3>Tipo de retorno</h3>
 
-<h3>Tipo de retorno</h3>
+			<p>
+				Os resultados são apresentados no formato <a
+					href="http://pt.wikipedia.org/wiki/XML"
+					title="Ver definição na Wikipedia">XML</a> e <a
+					href="http://pt.wikipedia.org/wiki/JSON">JSON</a>. Você pode
+				adicionar <em>.json</em> em cada URL para ter o formato JSON ou
+				configurar o header <a
+					href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">Accepts</a>
+				da sua requisição para <em>application/json</em> Um exemplo de
+				retorno XML para um candidato é mostrado na imagem abaixo:
+				<p />
+				<img src="imagens/ExemploXML.png"
+					alt="Imagem de um exemplo do XML retornado pelo serviço de busca"
+					title="Imagem de um exemplo do XML retornado pelo serviço de busca" />
+				<p class="legend">Imagem de um exemplo do XML retornado pelo
+					serviço de busca</p>
+				<p>
+					<a href="downloads/exemploXML.pdf" title="Copiar">Baixar
+						exemplo em PDF</a>
+				</p>
 
-<p>Os resultados são apresentados no formato <a
-	href="http://pt.wikipedia.org/wiki/XML"
-	title="Ver definição na Wikipedia">XML</a> e <a href="http://pt.wikipedia.org/wiki/JSON">JSON</a>. Você pode adicionar <em>.json</em> em cada URL para ter o formato JSON ou configurar o
-	header <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">Accepts</a> da sua requisição para <em>application/json</em> Um exemplo de retorno XML para
-um candidato é mostrado na imagem abaixo:
-<p />
-<img src="imagens/ExemploXML.png"
-	alt="Imagem de um exemplo do XML retornado pelo serviço de busca"
-	title="Imagem de um exemplo do XML retornado pelo serviço de busca" />
-<p class="legend">Imagem de um exemplo do XML retornado pelo serviço
-de busca</p>
-<p><a href="downloads/exemploXML.pdf" title="Copiar">Baixar
-exemplo em PDF</a></p>
+				<img src="imagens/ExemploJSON.png"
+					alt="Imagem de um exemplo do JSON retornado"
+					title="Imagem de um exemplo do JSON retornado" />
+				<p class="legend">Imagem de um exemplo do JSON retornado</p>
+				<h2>Aplicativos</h2>
 
-<img src="imagens/ExemploJSON.png"
-	alt="Imagem de um exemplo do JSON retornado"
-	title="Imagem de um exemplo do JSON retornado" />
-<p class="legend">Imagem de um exemplo do JSON retornado</p>
-<h2>Aplicativos</h2>
+				<p>Em breve...</p>
+				<h2>Contato</h2>
+				<p>
+					Se tiver alguma dúvida, sugestão ou gostaria de mostrar sua
+					aplicação, mande um e-mail para <strong>servicosEleicoes@williamprogrammer.com</strong>
+				</p>
+				<script type="text/javascript">
+				<!--
+					google_ad_client = "ca-pub-2089558045327352";
+					/* 468x60, criado 23/06/09 */
+					google_ad_slot = "8078641248";
+					google_ad_width = 468;
+					google_ad_height = 60;
+				//-->
+				</script>
+				<script type="text/javascript"
+					src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+					
+				</script>
+		</div>
 
-<p>Em breve...</p>
-<h2>Contato</h2>
-<p>Se tiver alguma dúvida, sugestão ou gostaria de mostrar sua
-aplicação, mande um e-mail para <strong>servicosEleicoes@williamprogrammer.com</strong></p>
-<script type="text/javascript">
-<!--
-	google_ad_client = "ca-pub-2089558045327352";
-	/* 468x60, criado 23/06/09 */
-	google_ad_slot = "8078641248";
-	google_ad_width = 468;
-	google_ad_height = 60;
-//-->
-</script>
-<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">	
-</script>
-
-</div>
-
-<div id="footer">
-<p>Desenvolvido por <a href=http://www.twitter.com/william_antonio>William
-Antônio Siqueira</a>. Design da página por <a
-	href=http://www.twitter.com/flaviowd>Flávio Araújo</a> da <a
-	href=http://www.3birds.com.br>3Birds</a>.</p>
-</div>
-</div>
+		<div id="footer">
+			<p>
+				Desenvolvido por <a href=http://www.twitter.com/william_antonio>William
+					Antônio Siqueira</a>. Design da página por <a
+					href=http://www.twitter.com/flaviowd>Flávio Araújo</a> da <a
+					href=http://www.3birds.com.br>3Birds</a>.
+			</p>
+		</div>
+	</div>
 </body>
 </html>

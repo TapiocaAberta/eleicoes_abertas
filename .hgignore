@@ -37,3 +37,4 @@ EleicoesAbertas/build/classes/TesteCandidato.class
 EleicoesAbertas/build/classes/org/eleicoesabertas/recursos/interceptores/InterceptorValidacao.class
 EleicoesAbertas/build/classes/org/eleicoesabertas/db/GeneralDao.class
 EleicoesAbertas/build/classes/org/eleicoesabertas/recursos/interceptores/InterceptorLogging.class
+EleicoesAbertas/build/classes/org/eleicoesabertas/recursos/interceptores/ValidationInterceptor.class
